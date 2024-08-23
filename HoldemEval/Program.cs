@@ -10,7 +10,7 @@ namespace HoldemEval
         {
             List<(int, int, bool, double)> results = [];
             List<Thread> tasks = [];
-            /*for (var cardV1 = 14; cardV1 > 1; cardV1--)
+            for (var cardV1 = 14; cardV1 > 1; cardV1--)
             {
                 for (var cardV2 = cardV1; cardV2 > 1; cardV2--)
                 {
@@ -19,14 +19,7 @@ namespace HoldemEval
                     OneExecution(results, c1, c2, suited: false);
                     OneExecution(results, c1, c2, suited: true);
                 }
-            }*/
-            var percc = OneExecutionRandom(results);
-            foreach (var task in tasks)
-            {
-                task.Join();
             }
-            Console.WriteLine($"win: {percc}%");
-            return;
             var strs = new List<string>();
             foreach (var r in results.OrderByDescending(rr => rr.Item4))
             {
@@ -47,11 +40,11 @@ namespace HoldemEval
                 return (int)((Math.Abs(value) % (maxValue - minValue) + minValue));
             }
         }
-        private static double OneExecutionRandom(List<(int, int, bool, double)> results, int iterations = 1000000)
+        private static double OneExecutionRandom(List<(int, int, bool, double)> results, int iterations = 10000)
         {
             for (int i = 0; i < iterations; i++)
             {
-                if (i % 50000 == 0)
+                if (i % 5000 == 0)
                 {
                     Console.WriteLine($"{i:0000000} / {iterations}");
                 }
@@ -83,8 +76,8 @@ namespace HoldemEval
                 }
                 if (i % 5000 == 1)
                 {
-                    //Console.WriteLine($"{cardV1.CardName()} {cardV2.CardName()} {suited} ({i} / {iterations})");
-                    //Console.WriteLine($"Best Hand: {bestHand}");
+                    Console.WriteLine($"{cardV1.CardName()} {cardV2.CardName()} {suited} ({i} / {iterations})");
+                    Console.WriteLine($"Best Hand: {bestHand}");
                     bestHand = null;
                 }
             }
